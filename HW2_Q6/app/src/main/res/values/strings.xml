@@ -13,7 +13,7 @@
     <string name="add">+</string>
     <string name="subtract">-</string>
     <string name="multiply">*</string>
-    <string name="divide">\</string>
+    <string name="divide">/</string>
     <string name="squareRoot">SQRT</string>
     <string name="decimal">.</string>
     <string name="equals">=</string>

@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import org.w3c.dom.Text
+import kotlin.math.sqrt
 
 class MainActivity : AppCompatActivity() {
     private lateinit var button0: android.widget.Button
@@ -55,59 +56,85 @@ class MainActivity : AppCompatActivity() {
         buttonEquals = findViewById(R.id.buttonEquals)
 
         textField = findViewById(R.id.calcResultText)
-//        textField.isActivated = true
-//        textField.isPressed = true
 
         var currentText: String
-        var operatorPressedBool = false
-        var firstnumber = ""
+        var firstNumber = ""
         var operatorPressed = ""
+        
+         /*
+         Error message occurs when divide by 0 or other illegal action occurs.
+         This causes lockUntilAC to be true, which locks the calculator until the user presses AC
+          */
+        val errorMessage = "ERR: PRESS AC"
+        var lockUntilAC = false
 
         // Listeners for all of the number buttons
         button0.setOnClickListener{
-            currentText = textField.text.toString() + "0"
-            textField.setText(currentText)
+            if(!lockUntilAC){
+                currentText = textField.text.toString() + "0"
+                textField.setText(currentText)
+            }
         }
         button1.setOnClickListener{
-            currentText = textField.text.toString() + "1"
-            textField.setText(currentText)
+            if(!lockUntilAC){
+                currentText = textField.text.toString() + "1"
+                textField.setText(currentText)
+            }
         }
         button2.setOnClickListener{
-            currentText = textField.text.toString() + "2"
-            textField.setText(currentText)
+            if(!lockUntilAC){
+                currentText = textField.text.toString() + "2"
+                textField.setText(currentText)
+            }
         }
         button3.setOnClickListener{
-            currentText = textField.text.toString() + "3"
-            textField.setText(currentText)
+            if(!lockUntilAC){
+                currentText = textField.text.toString() + "3"
+                textField.setText(currentText)
+            }
         }
         button4.setOnClickListener{
-            currentText = textField.text.toString() + "4"
-            textField.setText(currentText)
+            if(!lockUntilAC){
+                currentText = textField.text.toString() + "4"
+                textField.setText(currentText)
+            }
         }
         button5.setOnClickListener{
-            currentText = textField.text.toString() + "5"
-            textField.setText(currentText)
+            if(!lockUntilAC){
+                currentText = textField.text.toString() + "5"
+                textField.setText(currentText)
+            }
         }
         button6.setOnClickListener{
-            currentText = textField.text.toString() + "6"
-            textField.setText(currentText)
+            if(!lockUntilAC){
+                currentText = textField.text.toString() + "6"
+                textField.setText(currentText)
+            }
         }
         button7.setOnClickListener{
-            currentText = textField.text.toString() + "7"
-            textField.setText(currentText)
+            if(!lockUntilAC){
+                currentText = textField.text.toString() + "7"
+                textField.setText(currentText)
+            }
         }
         button8.setOnClickListener{
-            currentText = textField.text.toString() + "8"
-            textField.setText(currentText)
+            if(!lockUntilAC){
+                currentText = textField.text.toString() + "8"
+                textField.setText(currentText)
+            }
         }
         button9.setOnClickListener{
-            currentText = textField.text.toString() + "9"
-            textField.setText(currentText)
+            if(!lockUntilAC){
+                currentText = textField.text.toString() + "9"
+                textField.setText(currentText)
+            }
         }
         buttonDecimal.setOnClickListener{
-            if (!textField.text.toString().contains(".")) {
-                currentText = textField.text.toString() + "."
-                textField.setText(currentText)
+            if(!lockUntilAC){
+                if (!textField.text.toString().contains(".")) {
+                    currentText = textField.text.toString() + "."
+                    textField.setText(currentText)
+                }
             }
         }
 
@@ -122,89 +149,96 @@ class MainActivity : AppCompatActivity() {
                 "/" -> buttonDivide.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.black))
             }
             operatorPressed = ""
-            firstnumber = null.toString()
+            firstNumber = null.toString()
+            lockUntilAC = false
         }
 
         // Listeners for operations
         buttonAdd.setOnClickListener{
-            if (operatorPressed == ""){
+            if (operatorPressed == "" && !lockUntilAC){
                 operatorPressed = "+"
                 buttonAdd.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.red))
-                firstnumber = textField.toString()
+                firstNumber = textField.text.toString()
                 textField.setText("")
             }
         }
         buttonSubtract.setOnClickListener{
-            if(operatorPressed == ""){
+            if(operatorPressed == "" && !lockUntilAC){
                 operatorPressed = "-"
                 buttonSubtract.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.red))
-                firstnumber = textField.toString()
+                firstNumber = textField.text.toString()
                 textField.setText("")
             }
         }
         buttonMultiply.setOnClickListener{
-            if(operatorPressed == ""){
+            if(operatorPressed == "" && !lockUntilAC){
                 operatorPressed = "*"
                 buttonMultiply.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.red))
-                firstnumber = textField.toString()
+                firstNumber = textField.text.toString()
                 textField.setText("")
             }
         }
         buttonDivide.setOnClickListener{
-            if (operatorPressed == ""){
+            if (operatorPressed == "" && !lockUntilAC){
                 operatorPressed = "/"
                 buttonDivide.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.red))
-                firstnumber = textField.toString()
+                firstNumber = textField.text.toString()
                 textField.setText("")
             }
         }
         buttonSqrt.setOnClickListener{
-
+            if (operatorPressed != "" || lockUntilAC){
+                textField.setText(errorMessage)
+                lockUntilAC = true
+            } else{
+                val firstNumberDouble = textField.text.toString().toDouble()
+                val result = sqrt(firstNumberDouble)
+                textField.setText(result.toString())
+            }
         }
 
         // Equals button listener
         buttonEquals.setOnClickListener{
-            if(operatorPressed != ""){
-                var firstNumberDouble = textField.text.toString().toDouble()
-                var secondNumberDouble = textField.text.toString().toDouble()
+            if(!lockUntilAC){
+                if(operatorPressed != ""){
+                    val firstNumberDouble = firstNumber.toDouble()
+                    val secondNumberDouble = textField.text.toString().toDouble()
 
-                if(operatorPressed == "+"){
-                    var result = firstNumberDouble + secondNumberDouble
-                    textField.setText(result.toString())
-                    buttonAdd.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.black))
-                } else if (operatorPressed == "-"){
-//                    textField.setText((firstNumberDouble - secondNumberDouble).toString())
-                    textField.setText("test")
-                    buttonSubtract.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.black))
-                } else if(operatorPressed == "/"){
-                    textField.setText((firstNumberDouble / secondNumberDouble).toString())
-                    buttonDivide.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.black))
-                } else if(operatorPressed == "*"){
-                    textField.setText((firstNumberDouble * secondNumberDouble).toString())
-                    buttonMultiply.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.black))
+                    when (operatorPressed) {
+                        "+" -> {
+                            val result = firstNumberDouble + secondNumberDouble
+                            textField.setText(result.toString())
+                            buttonAdd.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.black))
+                        }
+                        "-" -> {
+                            textField.setText((firstNumberDouble - secondNumberDouble).toString())
+                            buttonSubtract.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.black))
+                        }
+                        "/" -> {
+                            if(secondNumberDouble != 0.0){
+                                textField.setText((firstNumberDouble / secondNumberDouble).toString())
+                            } else{
+                                textField.setText(errorMessage)
+                                lockUntilAC = true
+                            }
+                            buttonDivide.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.black))
+                        }
+                        "*" -> {
+                            textField.setText((firstNumberDouble * secondNumberDouble).toString())
+                            buttonMultiply.setBackgroundColor(ContextCompat.getColor(applicationContext, R.color.black))
+                        }
+                        else -> {
+                            textField.setText(errorMessage)
+                        }
+                    }
+
+                    // Clearing OperatorPressed after operation
+                    operatorPressed = ""
+
                 } else{
-                    textField.setText("ERROR: PRESS AC")
+                    textField.setText(firstNumber)
                 }
-
-                // Clearing OperatorPressed after operation
-                operatorPressed = ""
-
-
-                /*
-                TODO: FINISH IMPLEMENTING EQUALS AND ADD FUNCTIONALITY FOR SQUARE ROOT
-                 */
-
-
             }
         }
-
-
-
     }
-
-
-
-    // Creating button listeners to concatenate with the current text
-
-
 }
