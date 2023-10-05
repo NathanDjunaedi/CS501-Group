@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Flashcards</string>
+    <string name="username">User</string>
+    <string name="password">Password</string>
+    <string name="loginButtonText">Login</string>
+    <string name="generateProblemText">Generate 10 Random Problems</string>
+    <string name="yourAnswer">Your Answer:</string>
+    <string name="subtraction">Subtraction</string>
+    <string name="addition">Addition</string>
+    <string name="submitCaps">SUBMIT</string>
+</resources>
