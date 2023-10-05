@@ -1,5 +1,6 @@
 package com.example.hw3_q6
 
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -9,12 +10,19 @@ import android.widget.Toast
 import kotlin.random.Random
 import android.content.Context
 import android.content.Intent
+import android.util.Log
+private const val TAG = "CardActivity"
 
+// State managers
+private val numQuestions = 10
+private var numCorrect = 0
+var currentQuestion = 0
+var generateLock = false
+// Lists
+private lateinit var firstNumberList: MutableList<Int>
+private lateinit var secondNumberList: MutableList<Int>
+private lateinit var operatorList: MutableList<String>
 class CardActivity : AppCompatActivity() {
-    // Lists
-    private lateinit var firstNumberList: MutableList<Int>
-    private lateinit var secondNumberList: MutableList<Int>
-    private lateinit var operatorList: MutableList<String>
 
     // Text Fields
     private lateinit var firstNumber: TextView
@@ -28,17 +36,10 @@ class CardActivity : AppCompatActivity() {
     private lateinit var generateProblems: android.widget.Button
     private lateinit var submitAnswer: android.widget.Button
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate() called")
         setContentView(R.layout.activity_cards)
-
-        val numQuestions = 10
-        var numCorrect = 0
-        var currentQuestion = 0
-        var generateLock = false
 
         // Initialization of EditText field
         userAnswer = findViewById(R.id.editTextNumber)
@@ -51,6 +52,10 @@ class CardActivity : AppCompatActivity() {
         firstNumber = findViewById(R.id.firstNumber)
         secondNumber = findViewById(R.id.secondNumber)
         operator = findViewById(R.id.operator)
+        // If we were in the middle of a question set, re-set it on the textviews
+        if (generateLock){
+            setQuestion(currentQuestion)
+        }
 
         // Listeners
         generateProblems.setOnClickListener{
@@ -62,6 +67,7 @@ class CardActivity : AppCompatActivity() {
                 // Sets text for first time use
                 setQuestion(currentQuestion)
                 generateLock = true
+                currentQuestion = 0
             }
         }
 
@@ -133,6 +139,30 @@ class CardActivity : AppCompatActivity() {
         fun newIntent(packageContext: Context): Intent{
             return Intent(packageContext, CardActivity::class.java).apply{}
         }
+    }
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart() called")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume() called")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause() called")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop() called")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy() called")
     }
 
 }
