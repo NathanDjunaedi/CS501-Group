@@ -16,13 +16,16 @@ import androidx.core.view.GestureDetectorCompat
 import kotlin.math.abs
 import kotlin.system.exitProcess
 
+var flashlightState: Boolean = false
+val swipeThresh = 100
+val swipeVelThresh = 100
+
 class MainActivity : AppCompatActivity() {
     private lateinit var lightSwitch: androidx.appcompat.widget.SwitchCompat
     private lateinit var search: SearchView
     private lateinit var flingDetector: GestureDetectorCompat
     private lateinit var cameraManager: CameraManager
     private lateinit var cameraID: String
-    private var flashlightState: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +34,12 @@ class MainActivity : AppCompatActivity() {
         lightSwitch = findViewById(R.id.lightSwitch)
         search = findViewById(R.id.searchView)
 
-        // flingDetector = GestureDetectorCompat(this, FlingListener())
+        flingDetector = GestureDetectorCompat(this, FlingListener())
 
         // Check if device has a camera
         if(!applicationContext.packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)){
             Toast.makeText(this, "Application Needs Camera!", Toast.LENGTH_LONG).show()
+            Thread.sleep(Toast.LENGTH_LONG.toLong())
             exitProcess(1)
         }
 
@@ -50,7 +54,6 @@ class MainActivity : AppCompatActivity() {
         }
         search.setOnQueryTextListener(object : OnQueryTextListener {
             override fun onQueryTextChange(newText: String): Boolean {
-                // Do something when the user changes the text in the SearchView
                 return true
             }
 
@@ -67,39 +70,37 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun flashlightOn(){
-        if(flashlightState){
-            Toast.makeText(this, "Flashlight Already On!", Toast.LENGTH_SHORT).show()
-        } else{
-            cameraManager.setTorchMode(cameraID, true)
-            flashlightState = true
-            lightSwitch.isChecked = true
+        when(flashlightState){
+            true -> Toast.makeText(this, "Flashlight Already On!", Toast.LENGTH_SHORT).show()
+            false -> {
+                cameraManager.setTorchMode(cameraID, true)
+                flashlightState = true
+                lightSwitch.isChecked = true
+            }
         }
     }
 
     fun flashlightOff(){
-        if(!flashlightState){
-            Toast.makeText(this, "Flashlight Already Off!", Toast.LENGTH_SHORT).show()
-        } else{
-            cameraManager.setTorchMode(cameraID, false)
-            flashlightState = false
-            lightSwitch.isChecked = false
+        when(flashlightState){
+            false -> Toast.makeText(this, "Flashlight Already Off!", Toast.LENGTH_SHORT).show()
+            true -> {
+                cameraManager.setTorchMode(cameraID, false)
+                flashlightState = false
+                lightSwitch.isChecked = false
+            }
         }
     }
 
-/*
     override fun onTouchEvent(event: MotionEvent): Boolean {
         flingDetector.onTouchEvent(event)
         return super.onTouchEvent(event)
     }
 
-
     inner class FlingListener : GestureDetector.SimpleOnGestureListener() {
-        // listener class for flings
-        private val swipeThresh = 100
-        private val swipeVelThresh = 100
+        // Listener for flings
 
         override fun onFling(
-            // overriding onFling events only
+            // Only overrides onFling
             downEvent: MotionEvent,
             moveEvent: MotionEvent,
             velocityX: Float,
@@ -109,14 +110,12 @@ class MainActivity : AppCompatActivity() {
             val diffY = moveEvent.y.minus(downEvent.y)
 
             if (abs(diffX) < abs(diffY)) {
-                // this swipe is a vertical swipe
-                if(abs(diffY) > swipeThresh && abs(velocityX) > swipeVelThresh) {
-                    if (diffY > 0) {
+                if (abs(diffY) > swipeThresh && abs(velocityX) > swipeVelThresh) {
+                    if (diffY < 0) {
                         // Up Swipe
                         Log.d(TAG, "Up Swipe")
                         this@MainActivity.flashlightOn()
-                    }
-                    else {
+                    } else {
                         //Down Swipe
                         Log.d(TAG, "Down Swipe")
                         this@MainActivity.flashlightOff()
@@ -125,7 +124,5 @@ class MainActivity : AppCompatActivity() {
             }
             return super.onFling(downEvent, moveEvent, velocityX, velocityY)
         }
-
-     */
-
+    }
 }

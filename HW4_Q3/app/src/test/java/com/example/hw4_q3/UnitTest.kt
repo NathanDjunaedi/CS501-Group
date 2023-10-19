@@ -9,9 +9,15 @@ import org.junit.Assert.*
  *
  * See [testing documentation](http://d.android.com/tools/testing).
  */
-class ExampleUnitTest {
+class UnitTest {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun startsOff() {
+        assertEquals(flashlightState, false)
+    }
+
+    @Test
+    fun thresholdsCorrect(){
+        assertEquals(swipeThresh, 100)
+        assertEquals(swipeVelThresh, 100)
     }
 }
