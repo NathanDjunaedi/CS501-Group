@@ -3,6 +3,7 @@ package com.example.hangman
 import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,8 +11,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.example.hangman.databinding.FragmentLettersBinding
+private const val TAG = "LettersFragment"
 
 class LettersFragment : Fragment() {
     private lateinit var binding: FragmentLettersBinding
@@ -45,20 +46,29 @@ class LettersFragment : Fragment() {
         val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
         currentQuestion = viewModel.currentQuestion
 
+        getView()?.findViewById<Button>(R.id.newGame)?.setOnClickListener {
+            val questionId = (0..5).random()
+            enableAllButtons()
+            hintPressed = 0
+            currentQuestion?.reset()
+            viewModel.currentQuestion = viewModel.questionBank?.get(questionId)
+            currentQuestion = viewModel.currentQuestion
+            viewModel.updateData()
+        }
+
         for ((index, button) in letterButtons.withIndex()) {
             val buttonView = getView()?.findViewById<Button>(button)
             if (buttonView != null) {
-                buttonListeners[button] = buttonView.setOnClickListener{
+                buttonListeners[button] = buttonView.setOnClickListener {
                     if (currentQuestion?.tries!! > 1) {
                         currentQuestion?.tryChar((97 + index).toChar())
-                        alphaSet = alphaSet - (97 +index)
+                        alphaSet = alphaSet - (97 + index)
                         viewModel.updateData()
                         buttonView.isEnabled = false
                         buttonView.isClickable = false
-                    }
-                    else if (currentQuestion?.tries == 1) {
+                    } else if (currentQuestion?.tries == 1) {
                         currentQuestion?.tryChar((97 + index).toChar())
-                        alphaSet = alphaSet - (97 +index)
+                        alphaSet = alphaSet - (97 + index)
                         viewModel.updateData()
                         disableAllButtons()
                     }
@@ -70,19 +80,22 @@ class LettersFragment : Fragment() {
                 when (hintPressed) {
                     0 -> getView()?.findViewById<TextView>(R.id.hintBox)?.text =
                         currentQuestion?.showHint()
+
                     1 -> {
-                        if(currentQuestion?.tries!! > 1) {
+                        if (currentQuestion?.tries!! > 1) {
                             disableHalf()
-                            currentQuestion!!.tries --
+                            currentQuestion!!.tries--
                             viewModel.updateData()
                         } else {
                             getView()?.findViewById<Button>(R.id.hintButton)?.isEnabled = false
                             getView()?.findViewById<Button>(R.id.hintButton)?.isClickable = false
-                        } }
+                        }
+                    }
+
                     2 -> {
-                        if(currentQuestion?.tries!! > 1) {
+                        if (currentQuestion?.tries!! > 1) {
                             showVowels()
-                            currentQuestion!!.tries --
+                            currentQuestion!!.tries--
                             viewModel.updateData()
                         } else {
                             getView()?.findViewById<Button>(R.id.hintButton)?.isEnabled = false
@@ -90,7 +103,7 @@ class LettersFragment : Fragment() {
                         }
                     }
                 }
-                hintPressed ++
+                hintPressed++
                 viewModel.updateData()
             }
         }
@@ -102,6 +115,15 @@ class LettersFragment : Fragment() {
             if (buttonView != null) {
                 buttonView.isEnabled = false
                 buttonView.isClickable = false
+            }
+        }
+    }
+    private fun enableAllButtons() {
+        for (button in letterButtons) {
+            val buttonView = view?.findViewById<Button>(button)
+            if (buttonView != null) {
+                buttonView.isEnabled = true
+                buttonView.isClickable = true
             }
         }
     }

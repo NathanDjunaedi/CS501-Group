@@ -235,6 +235,7 @@
     </ScrollView>
 
     <Button
+        android:id="@+id/newGame"
         android:layout_margin="24dp"
         android:text="@string/new_game"
         android:layout_width="wrap_content"

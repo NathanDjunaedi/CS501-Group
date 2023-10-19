@@ -6,13 +6,11 @@ class Question{
     var word: String = ""
     private var hint: String = ""
     var length: Int = 0
-    private var hints: Int = 0
     var tries: Int = 6
     private var letters: MutableMap<Char, MutableList<Int>> = mutableMapOf()
     var revealed: MutableMap<Int, Char> = mutableMapOf()
 
-    private fun reset() {
-        hints = 0
+    fun reset() {
         tries = 6
         revealed.replaceAll {_,_ -> '_'}
     }
