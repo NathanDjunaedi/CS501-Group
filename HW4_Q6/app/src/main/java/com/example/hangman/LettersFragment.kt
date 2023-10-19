@@ -23,8 +23,7 @@ class LettersFragment : Fragment() {
         R.id.l, R.id.m, R.id.n, R.id.o, R.id.p, R.id.q, R.id.r, R.id.s, R.id.t, R.id.u, R.id.v,
         R.id.w, R.id.x, R.id.y, R.id.z, )
     private var buttonListeners : MutableMap<Int, Any?> = mutableMapOf()
-    private var alphaSet = (97..123).toSet()
-    private var hintPressed = 0
+    private var alphaSet = (97..122).toSet()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,11 +44,12 @@ class LettersFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val isLandscape = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
         currentQuestion = viewModel.currentQuestion
+        currentQuestion?.let { disableButton(it.pressedKeys) }
 
         getView()?.findViewById<Button>(R.id.newGame)?.setOnClickListener {
             val questionId = (0..5).random()
             enableAllButtons()
-            hintPressed = 0
+            currentQuestion?.hintPressed = 0
             currentQuestion?.reset()
             viewModel.currentQuestion = viewModel.questionBank?.get(questionId)
             currentQuestion = viewModel.currentQuestion
@@ -63,21 +63,20 @@ class LettersFragment : Fragment() {
                     if (currentQuestion?.tries!! > 1) {
                         currentQuestion?.tryChar((97 + index).toChar())
                         alphaSet = alphaSet - (97 + index)
+                        disableButton(listOf(index))
                         viewModel.updateData()
-                        buttonView.isEnabled = false
-                        buttonView.isClickable = false
                     } else if (currentQuestion?.tries == 1) {
                         currentQuestion?.tryChar((97 + index).toChar())
                         alphaSet = alphaSet - (97 + index)
-                        viewModel.updateData()
                         disableAllButtons()
+                        viewModel.updateData()
                     }
                 }
             }
         }
         if (isLandscape) {
             getView()?.findViewById<Button>(R.id.hintButton)?.setOnClickListener {
-                when (hintPressed) {
+                when (currentQuestion?.hintPressed) {
                     0 -> getView()?.findViewById<TextView>(R.id.hintBox)?.text =
                         currentQuestion?.showHint()
 
@@ -103,7 +102,7 @@ class LettersFragment : Fragment() {
                         }
                     }
                 }
-                hintPressed++
+                currentQuestion?.hintPressed = currentQuestion?.hintPressed!! + 1
                 viewModel.updateData()
             }
         }
@@ -111,6 +110,7 @@ class LettersFragment : Fragment() {
 
     private fun disableAllButtons() {
         for (button in letterButtons) {
+            currentQuestion?.pressedKeys?.add(button)
             val buttonView = view?.findViewById<Button>(button)
             if (buttonView != null) {
                 buttonView.isEnabled = false
@@ -120,10 +120,12 @@ class LettersFragment : Fragment() {
     }
     private fun enableAllButtons() {
         for (button in letterButtons) {
-            val buttonView = view?.findViewById<Button>(button)
-            if (buttonView != null) {
-                buttonView.isEnabled = true
-                buttonView.isClickable = true
+            if (button !in currentQuestion?.pressedKeys!!) {
+                val buttonView = view?.findViewById<Button>(button)
+                if (buttonView != null) {
+                    buttonView.isEnabled = true
+                    buttonView.isClickable = true
+                }
             }
         }
     }
@@ -148,6 +150,8 @@ class LettersFragment : Fragment() {
 
     private fun disableButton(vowelButtons: List<Int>) {
         for (index in vowelButtons) {
+            if (index !in  currentQuestion?.pressedKeys!!) {
+                currentQuestion?.pressedKeys!!.add(index) }
             val currentId = letterButtons[index]
             val buttonView = view?.findViewById<Button>(currentId)
             if (buttonView != null) {
@@ -155,6 +159,11 @@ class LettersFragment : Fragment() {
                 buttonView.isClickable = false
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "LetterFrag destroyed")
     }
 }
 

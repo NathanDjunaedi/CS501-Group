@@ -9,10 +9,14 @@ class Question{
     var tries: Int = 6
     private var letters: MutableMap<Char, MutableList<Int>> = mutableMapOf()
     var revealed: MutableMap<Int, Char> = mutableMapOf()
+    var hintPressed = 0
+    var pressedKeys = mutableListOf<Int>()
 
     fun reset() {
         tries = 6
         revealed.replaceAll {_,_ -> '_'}
+        hintPressed = 0
+        pressedKeys = mutableListOf<Int>()
     }
 
     fun setPars(str: String, hintWord: String) {
