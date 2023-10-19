@@ -17,21 +17,12 @@ import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.sqrt
 
-
-/*
-Idea for recording sensitivity:
-if the accelerometer records a large difference in a set amount of seconds, then display a toast
- */
-
-
 class MainActivity : AppCompatActivity() {
     private lateinit var sensorManager: SensorManager
     private lateinit var sensitivityBar: SeekBar
     private lateinit var textView: TextView
-    private var acceleration = 0f
     private var currentAcceleration = 0f
     private var lastAcceleration = 0f
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +34,8 @@ class MainActivity : AppCompatActivity() {
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         Objects.requireNonNull(sensorManager).registerListener(sensorListener,
             sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL)
-
-
-
     }
+
     private val sensorListener: SensorEventListener = object : SensorEventListener{
         override fun onSensorChanged(event: SensorEvent) {
             val x = event.values[0]
@@ -55,20 +44,14 @@ class MainActivity : AppCompatActivity() {
             val gravity = 9.81
             lastAcceleration = currentAcceleration
             val accelerationX = abs(x)
-            val accelerationY = abs(y - 9.81).toFloat()
+            val accelerationY = abs(y - gravity).toFloat()
             val accelerationZ = abs(z)
-//            Log.d(TAG, x.toString())
-//            Log.d(TAG, y.toString())
-//            Log.d(TAG, z.toString())
-
 
             val maxAxis = Math.max(accelerationX, Math.max(accelerationY, accelerationZ))
 
             currentAcceleration = sqrt((x * x + y * y + z * z).toDouble()).toFloat()
-            //val difference: Float = currentAcceleration - lastAcceleration
-            //acceleration = acceleration * 0.9f + difference
             val xToast = Toast.makeText(this@MainActivity, "X Axis!", Toast.LENGTH_SHORT)
-            val yToast = Toast.makeText(this@MainActivity, "Z Axis!", Toast.LENGTH_SHORT)
+            val yToast = Toast.makeText(this@MainActivity, "Y Axis!", Toast.LENGTH_SHORT)
             val zToast = Toast.makeText(this@MainActivity, "Z Axis!", Toast.LENGTH_SHORT)
 
             if(maxAxis > (sensitivityBar.progress + 1) * 2){
@@ -85,13 +68,10 @@ class MainActivity : AppCompatActivity() {
                     accelerationZ -> {
                         Log.d(TAG, "Z Axis")
                         zToast.show()
-
-                        val x = zToast.view!!.isShown
                         }
                     else -> Log.d(TAG, "Error!")
                 }
             }
-
         }
 
         override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {
