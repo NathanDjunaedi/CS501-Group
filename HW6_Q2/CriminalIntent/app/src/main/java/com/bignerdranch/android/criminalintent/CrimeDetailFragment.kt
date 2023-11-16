@@ -26,8 +26,10 @@ import com.bignerdranch.android.criminalintent.databinding.FragmentCrimeDetailBi
 import kotlinx.coroutines.launch
 import java.io.File
 import java.util.Date
+import java.util.Locale
 
 private const val DATE_FORMAT = "EEE, MMM, dd"
+private const val ALT_DATE_FORMAT = "EEE, dd, MMM"
 
 class CrimeDetailFragment : Fragment() {
 
@@ -185,8 +187,13 @@ class CrimeDetailFragment : Fragment() {
         } else {
             getString(R.string.crime_report_unsolved)
         }
+        
+        val dateString: String = when(Locale.getDefault()){
+            Locale.US -> DateFormat.format(DATE_FORMAT, crime.date).toString()
+            else -> DateFormat.format(ALT_DATE_FORMAT, crime.date).toString()
+        }
 
-        val dateString = DateFormat.format(DATE_FORMAT, crime.date).toString()
+        //val dateString = DateFormat.format(DATE_FORMAT, crime.date).toString()
         val suspectText = if (crime.suspect.isBlank()) {
             getString(R.string.crime_report_no_suspect)
         } else {
