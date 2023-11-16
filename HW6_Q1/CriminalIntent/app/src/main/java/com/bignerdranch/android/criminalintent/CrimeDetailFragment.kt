@@ -3,6 +3,8 @@ package com.bignerdranch.android.criminalintent
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ResolveInfo
+import android.graphics.drawable.Drawable
+import android.media.Image
 import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -10,11 +12,13 @@ import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.core.view.doOnLayout
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -25,6 +29,7 @@ import androidx.navigation.fragment.navArgs
 import com.bignerdranch.android.criminalintent.databinding.FragmentCrimeDetailBinding
 import kotlinx.coroutines.launch
 import java.io.File
+import java.net.URI
 import java.util.Date
 
 private const val DATE_FORMAT = "EEE, MMM, dd"
@@ -70,6 +75,7 @@ class CrimeDetailFragment : Fragment() {
             FragmentCrimeDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
+    private var imageURI: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -97,6 +103,7 @@ class CrimeDetailFragment : Fragment() {
             )
             crimeSuspect.isEnabled = canResolveIntent(selectSuspectIntent)
 
+
             crimeCamera.setOnClickListener {
                 photoName = "IMG_${Date()}.JPG"
                 val photoFile = File(requireContext().applicationContext.filesDir, photoName)
@@ -114,6 +121,16 @@ class CrimeDetailFragment : Fragment() {
                 null
             )
             crimeCamera.isEnabled = canResolveIntent(captureImageIntent)
+
+            val thumbnailImageView = view.findViewById<ImageView>(R.id.crime_photo)
+
+            thumbnailImageView.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putString("imageURI", imageURI)
+                val navController = findNavController()
+
+                navController.navigate(R.id.action_crimeDetailFragment_to_imageViewFragment, bundle)
+            }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
@@ -172,6 +189,7 @@ class CrimeDetailFragment : Fragment() {
                 getString(R.string.crime_suspect_text)
             }
 
+            imageURI = crime.photoFileName
             updatePhoto(crime.photoFileName)
         }
     }
