@@ -1,0 +1,19 @@
+1. layouts
+    TODO registration
+    TODO expanded entry
+    TODO settings screen
+    TODO main screen
+2. coding
+    TODO login
+    TODO registration
+    TODO expanded entry
+    TODO settings screen
+    TODO main screen
+3. views
+    TODO recyclerview on main screen for entries
+
+4. APIs n' stuff
+    TODO google maps functionality in view
+    TODO outside storage for entries
+
+
