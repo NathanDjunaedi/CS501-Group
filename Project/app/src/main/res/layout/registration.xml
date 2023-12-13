@@ -6,7 +6,8 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/register_text"
+        android:id="@+id/registration_text"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/registration_text"
@@ -17,51 +18,147 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.1" />
 
-    <EditText
-        android:id="@+id/username"
+<!--  REGISTRATION SECTION  -->
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="260dp"
+    <EditText
+        android:id="@+id/username_edittext"
+
         android:hint="@string/username_hint"
         android:importantForAutofill="no"
         android:inputType="textNoSuggestions"
         android:minWidth="48dp"
         android:minHeight="48dp"
 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="260dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/register_text"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/registration_text"
+        app:layout_constraintVertical_bias="0.15" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/password_edittext"
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:hint="@string/password_hint"
         android:importantForAutofill="no"
         android:inputType="textPassword"
         android:minWidth="48dp"
         android:minHeight="48dp"
-        app:layout_constraintBottom_toBottomOf="parent"
 
-        app:layout_constraintEnd_toEndOf="@+id/username"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/username"
-        app:layout_constraintTop_toBottomOf="@+id/username"
-        app:layout_constraintVertical_bias="0.174" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/username_edittext"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/username_edittext"
+        app:layout_constraintTop_toBottomOf="@+id/username_edittext"
+        app:layout_constraintVertical_bias="0.1"
+        />
+
+    <Button
+        android:id="@+id/register_button"
+
+        android:text="@string/register_button"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/car_model_spinner"
+        app:layout_constraintStart_toEndOf="@+id/car_make_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/car_year_spinner" />
+
+<!--CAR INFORMATION-->
+    <TextView
+        android:id="@+id/car_info_text"
+
         android:text="@string/car_name_text"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toBottomOf="@+id/password_edittext"
+        app:layout_constraintVertical_bias="0.1" />
 
 
+    <!--YEAR SUBSECTION-->
+    <TextView
+        android:id="@+id/car_year_text"
+
+        android:text="@string/car_year_text"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/car_info_text"
+        app:layout_constraintStart_toStartOf="@+id/car_info_text"
+        app:layout_constraintTop_toBottomOf="@+id/car_info_text" />
+
+    <Spinner
+        android:id="@+id/car_year_spinner"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/car_year_text"
+        app:layout_constraintStart_toStartOf="@+id/car_year_text"
+        app:layout_constraintTop_toBottomOf="@+id/car_year_text"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <!--MAKE SUBSECTION-->
+    <TextView
+        android:id="@+id/car_make_text"
+
+        android:text="@string/car_make_text"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/car_info_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/car_year_spinner"
+        app:layout_constraintVertical_bias="0.15" />
+
+    <Spinner
+        android:id="@+id/car_make_spinner"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/car_make_text"
+        app:layout_constraintStart_toStartOf="@+id/car_make_text"
+        app:layout_constraintTop_toBottomOf="@+id/car_make_text"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <!--MODEL SUBSECTION-->
+    <TextView
+        android:id="@+id/car_model_text"
+
+        android:text="@string/car_model_text"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/car_info_text"
+        app:layout_constraintTop_toBottomOf="@+id/car_year_spinner"
+        app:layout_constraintVertical_bias="0.15" />
+
+    <Spinner
+        android:id="@+id/car_model_spinner"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/car_model_text"
+        app:layout_constraintStart_toStartOf="@+id/car_model_text"
+        app:layout_constraintTop_toBottomOf="@+id/car_model_text"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

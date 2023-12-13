@@ -1,9 +1,9 @@
 1. layouts
     TODO
-        registration
         expanded entry
         settings screen
         main screen
+        new entry screen
 2. coding
     TODO
         login
