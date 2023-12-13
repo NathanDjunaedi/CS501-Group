@@ -4,4 +4,6 @@
     <string name="password_hint">Password\n</string>
     <string name="register_button_text">Register</string>
     <string name="login_button_text">Login</string>
+    <string name="registration_text">Registration</string>
+    <string name="car_name_text">Car Information\n</string>
 </resources>

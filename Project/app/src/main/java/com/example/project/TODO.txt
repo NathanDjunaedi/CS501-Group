@@ -1,19 +1,26 @@
 1. layouts
-    TODO registration
-    TODO expanded entry
-    TODO settings screen
-    TODO main screen
+    TODO
+        registration
+        expanded entry
+        settings screen
+        main screen
 2. coding
-    TODO login
-    TODO registration
-    TODO expanded entry
-    TODO settings screen
-    TODO main screen
+    TODO
+        login
+        registration
+        expanded entry
+        settings screen
+        main screen
 3. views
-    TODO recyclerview on main screen for entries
+    TODO
+        recyclerview on main screen for entries
 
 4. APIs n' stuff
-    TODO google maps functionality in view
-    TODO outside storage for entries
+    TODO
+        google maps functionality in view
+        outside storage for entries
 
-
+5. other stuff
+    TODO
+        add library of cars for registration screen
+        set application for portrait only
