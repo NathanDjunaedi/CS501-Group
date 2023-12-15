@@ -10,4 +10,11 @@
     <string name="car_model_text">3. Model</string>
     <string name="car_year_text">1. Year</string>
     <string name="register_button">Register</string>
+    <string name="settings">Settings</string>
+    <string name="change_password">Change Password</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="edit_vehicles">Edit Vehicles</string>
+    <string name="set_password">Set Password</string>
+    <string name="new_vehicle_text">New Vehicle</string>
 </resources>
