@@ -17,4 +17,5 @@
     <string name="edit_vehicles">Edit Vehicles</string>
     <string name="set_password">Set Password</string>
     <string name="new_vehicle_text">New Vehicle</string>
+    <string name="add_vehicle">Add Vehicle</string>
 </resources>
