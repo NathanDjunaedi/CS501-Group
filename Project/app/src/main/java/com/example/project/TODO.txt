@@ -1,9 +1,6 @@
 1. layouts
     TODO
-        expanded entry
-        settings screen
         main screen
-        new entry screen
 2. coding
     TODO
         login

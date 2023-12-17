@@ -161,4 +161,17 @@
         app:layout_constraintTop_toBottomOf="@+id/car_model_text"
         app:layout_constraintVertical_bias="0.0" />
 
+    <ImageButton
+        android:id="@+id/back_button_registration"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/registration_text"
+        app:layout_constraintEnd_toStartOf="@+id/registration_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/arrow_up_float"
+
+         />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

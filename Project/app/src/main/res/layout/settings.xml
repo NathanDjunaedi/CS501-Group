@@ -210,5 +210,15 @@
         app:layout_constraintStart_toEndOf="@+id/car_model_text"
         app:layout_constraintTop_toTopOf="@+id/car_model_text" />
 
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/settings_text"
+        app:layout_constraintEnd_toStartOf="@+id/settings_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:drawable/arrow_up_float" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
