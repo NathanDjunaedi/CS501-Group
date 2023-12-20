@@ -18,4 +18,8 @@
     <string name="set_password">Set Password</string>
     <string name="new_vehicle_text">New Vehicle</string>
     <string name="add_vehicle">Add Vehicle</string>
+    <string name="reaction_time">Reaction Time:</string>
+    <string name="eighth_mile">1/8 Mile:</string>
+    <string name="quarter_mile">1/4 Mile:</string>
+    <string name="back">Back</string>
 </resources>

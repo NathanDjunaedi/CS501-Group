@@ -5,75 +5,172 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageButton
-        android:id="@+id/back_expanded"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/username_expanded"
-        app:layout_constraintEnd_toStartOf="@+id/username_expanded"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/arrow_up_float" />
-
     <TextView
         android:id="@+id/username_expanded"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Username"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.116" />
+        app:layout_constraintVertical_bias="0.308" />
 
     <TextView
         android:id="@+id/car_type_expanded"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Vehicle"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username_expanded"
-        app:layout_constraintVertical_bias="0.065" />
+        app:layout_constraintVertical_bias="0.5" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_expanded"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="429dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.314">
+
+        <TextView
+            android:id="@+id/eighth_time_expanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/reaction_time_expanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/eighth_time_expanded"
+            app:layout_constraintEnd_toEndOf="@+id/eighth_time_expanded"
+            app:layout_constraintStart_toStartOf="@+id/eighth_time_expanded"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/quarter_time_expanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/eighth_time_expanded"
+            app:layout_constraintStart_toStartOf="@+id/eighth_time_expanded"
+            app:layout_constraintTop_toBottomOf="@+id/eighth_time_expanded" />
+
+        <TextView
+            android:id="@+id/reaction_time_text_expanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reaction_time"
+            app:layout_constraintBottom_toBottomOf="@+id/reaction_time_expanded"
+            app:layout_constraintEnd_toStartOf="@+id/reaction_time_expanded"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/reaction_time_expanded" />
+
+        <TextView
+            android:id="@+id/eighth_text_expanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/eighth_mile"
+            app:layout_constraintBottom_toBottomOf="@+id/eighth_time_expanded"
+            app:layout_constraintEnd_toStartOf="@+id/eighth_time_expanded"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/eighth_time_expanded" />
+
+        <TextView
+            android:id="@+id/quarter_text_expanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/quarter_mile"
+            app:layout_constraintBottom_toBottomOf="@+id/quarter_time_expanded"
+            app:layout_constraintEnd_toStartOf="@+id/quarter_time_expanded"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/quarter_time_expanded" />
+
+        <TextView
+            android:id="@+id/eighth_mph_expanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/eighth_time_expanded"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/eighth_time_expanded"
+            app:layout_constraintTop_toTopOf="@+id/eighth_time_expanded" />
+
+        <TextView
+            android:id="@+id/quarter_mph_expanded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/quarter_time_expanded"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/quarter_time_expanded"
+            app:layout_constraintTop_toTopOf="@+id/quarter_time_expanded" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="204dp"
+        android:layout_marginTop="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/car_type_expanded" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4"
+        app:layout_constraintVertical_bias="1.0">
 
-    <ImageButton
-        android:id="@+id/reaction_fire_expanded"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/reaction_heart_expanded"
-        app:layout_constraintEnd_toStartOf="@+id/reaction_heart_expanded"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/reaction_heart_expanded"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        <ImageView
+            android:id="@+id/reaction_heart_expanded"
+            android:layout_width="70sp"
+            android:layout_height="70sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.119"
+            app:srcCompat="@drawable/heart" />
 
-    <ImageButton
-        android:id="@+id/reaction_wow_expanded"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/reaction_heart_expanded"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/reaction_heart_expanded"
-        app:layout_constraintTop_toTopOf="@+id/reaction_heart_expanded"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        <ImageView
+            android:id="@+id/reaction_wow_expanded"
+            android:layout_width="70sp"
+            android:layout_height="70sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.119"
+            app:srcCompat="@drawable/wow"
+            tools:layout_editor_absoluteX="325dp" />
 
-    <ImageButton
-        android:id="@+id/reaction_heart_expanded"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_expanded"
-        app:srcCompat="@android:drawable/btn_star_big_on" />
+        <Button
+            android:id="@+id/cancel_registration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/back"
+
+            android:textStyle="bold"
+            app:cornerRadius="0dp"
+
+            tools:layout_editor_absoluteY="114dp" />
+
+        <ImageView
+            android:id="@+id/reaction_fire_expanded"
+            android:layout_width="70sp"
+            android:layout_height="70sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.119"
+            app:srcCompat="@drawable/fire"
+            tools:layout_editor_absoluteX="16dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

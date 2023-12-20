@@ -5,20 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--  REGISTRATION SECTION  -->
+
     <TextView
         android:id="@+id/registration_text"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/registration_text"
+        android:textSize="20sp"
+
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.1" />
-
-<!--  REGISTRATION SECTION  -->
+        app:layout_constraintVertical_bias="0.065" />
 
     <EditText
         android:id="@+id/username_edittext"
@@ -28,8 +31,9 @@
         android:inputType="textNoSuggestions"
         android:minWidth="48dp"
         android:minHeight="48dp"
+        android:gravity="center"
 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="260dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,39 +45,45 @@
     <EditText
         android:id="@+id/password_edittext"
 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:hint="@string/password_hint"
         android:importantForAutofill="no"
         android:inputType="textPassword"
+
         android:minWidth="48dp"
         android:minHeight="48dp"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/username_edittext"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/username_edittext"
         app:layout_constraintTop_toBottomOf="@+id/username_edittext"
-        app:layout_constraintVertical_bias="0.1"
-        />
+        app:layout_constraintVertical_bias="0.058" />
 
+    <!--CAR INFORMATION-->
     <Button
         android:id="@+id/register_button"
 
-        android:text="@string/register_button"
-
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
+
+        android:text="@string/register_button"
+        android:textStyle="bold"
+        android:textSize="20sp"
+
+        app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/car_model_spinner"
         app:layout_constraintStart_toEndOf="@+id/car_make_spinner"
-        app:layout_constraintTop_toBottomOf="@+id/car_year_spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/car_year_spinner"
+        app:layout_constraintVertical_bias="0.675" />
 
-<!--CAR INFORMATION-->
     <TextView
         android:id="@+id/car_info_text"
 
         android:text="@string/car_name_text"
+
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -161,17 +171,20 @@
         app:layout_constraintTop_toBottomOf="@+id/car_model_text"
         app:layout_constraintVertical_bias="0.0" />
 
-    <ImageButton
-        android:id="@+id/back_button_registration"
-
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/cancel_registration"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/registration_text"
-        app:layout_constraintEnd_toStartOf="@+id/registration_text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/arrow_up_float"
+        android:text="Cancel"
 
-         />
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:cornerRadius="0dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/register_button"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
