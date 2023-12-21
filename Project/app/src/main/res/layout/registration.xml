@@ -77,45 +77,45 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:text="@string/car_model_text"
-            app:layout_constraintBottom_toBottomOf="@+id/car_model_autocomplete_registration"
-            app:layout_constraintEnd_toStartOf="@+id/car_model_autocomplete_registration"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/car_model_autocomplete_registration" />
+            app:layout_constraintBottom_toTopOf="@+id/register_button"
+            app:layout_constraintEnd_toEndOf="@+id/car_make_text"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/car_make_text"
+            app:layout_constraintTop_toBottomOf="@+id/car_make_text"
+            app:layout_constraintVertical_bias="0.413" />
 
         <AutoCompleteTextView
             android:id="@+id/car_model_autocomplete_registration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AutoCompleteTextView"
-            app:layout_constraintBottom_toTopOf="@+id/register_button"
-            app:layout_constraintEnd_toEndOf="@+id/car_make_autocomplete_registration"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/car_make_autocomplete_registration"
-            app:layout_constraintTop_toBottomOf="@+id/car_make_autocomplete_registration"
-            app:layout_constraintVertical_bias="0.0" />
+            android:minWidth="100dp"
+            app:layout_constraintBottom_toBottomOf="@+id/car_model_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/car_model_text"
+            app:layout_constraintTop_toTopOf="@+id/car_model_text" />
 
-        <TextView
+        a<TextView
             android:id="@+id/car_make_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
             android:text="@string/car_make_text"
-            app:layout_constraintBottom_toBottomOf="@+id/car_make_autocomplete_registration"
-            app:layout_constraintEnd_toStartOf="@+id/car_make_autocomplete_registration"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/car_make_autocomplete_registration" />
+            app:layout_constraintBottom_toTopOf="@+id/register_button"
+            app:layout_constraintEnd_toEndOf="@+id/car_year_text"
+            app:layout_constraintHorizontal_bias="0.333"
+            app:layout_constraintStart_toStartOf="@+id/car_year_text"
+            app:layout_constraintTop_toBottomOf="@+id/car_year_text"
+            app:layout_constraintVertical_bias="0.218" />
 
         <AutoCompleteTextView
             android:id="@+id/car_make_autocomplete_registration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AutoCompleteTextView"
-            app:layout_constraintBottom_toTopOf="@+id/register_button"
-            app:layout_constraintEnd_toEndOf="@+id/car_year_autocomplete_registration"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/car_year_autocomplete_registration"
-            app:layout_constraintTop_toBottomOf="@+id/car_year_autocomplete_registration"
-            app:layout_constraintVertical_bias="0.0" />
+            android:minWidth="100dp"
+            app:layout_constraintBottom_toBottomOf="@+id/car_make_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/car_make_text"
+            app:layout_constraintTop_toTopOf="@+id/car_make_text" />
 
         <TextView
             android:id="@+id/car_year_text"
@@ -123,23 +123,22 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:text="@string/car_year_text"
-            app:layout_constraintBottom_toBottomOf="@+id/car_year_autocomplete_registration"
-            app:layout_constraintEnd_toStartOf="@+id/car_year_autocomplete_registration"
+            app:layout_constraintBottom_toTopOf="@+id/register_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.054"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/car_year_autocomplete_registration" />
+            app:layout_constraintTop_toBottomOf="@+id/car_info_text"
+            app:layout_constraintVertical_bias="0.153" />
 
         <AutoCompleteTextView
             android:id="@+id/car_year_autocomplete_registration"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="AutoCompleteTextView"
-            app:layout_constraintBottom_toTopOf="@+id/register_button"
+            android:minWidth="100dp"
+            app:layout_constraintBottom_toBottomOf="@+id/car_year_text"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.848"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/car_info_text"
-            app:layout_constraintVertical_bias="0.142" />
+            app:layout_constraintStart_toEndOf="@+id/car_year_text"
+            app:layout_constraintTop_toTopOf="@+id/car_year_text" />
 
         <TextView
             android:id="@+id/car_info_text"

@@ -1,5 +1,6 @@
 package com.example.project
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -12,8 +13,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var passwordEditText: EditText
     private lateinit var loginButton: Button
     private lateinit var registerButton: Button
-    private lateinit var fileUser: String
-    private lateinit var filePassword: String
+
+    // Variables coming from database
+    private lateinit var databaseUser: String
+    private lateinit var databasePassword: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,37 +28,44 @@ class MainActivity : AppCompatActivity() {
         loginButton = findViewById<Button>(R.id.login_button)
         registerButton = findViewById<Button>(R.id.registerButton)
 
+
+
+        // Setting the on click listener for the login button
+        loginButton.setOnClickListener {
+
+        }
+    }
+    // Login method
+    private fun login() {
         // Getting the user input
         userName = userEditText.text.toString()
         password = passwordEditText.text.toString()
 
-        // Calling the
-
-        // Setting the on click listener for the login button
-        loginButton.setOnClickListener {
-            // Checking if the user input is empty
-            if (userName.isEmpty() || password.isEmpty()) {
+        // Checking if the user input is empty
+        if (userName.isEmpty() || password.isEmpty()) {
+            // Displaying an error message
+            userEditText.error = "Username is required"
+            passwordEditText.error = "Password is required"
+        } else {
+            // Checking if the user input is correct
+            if (userName == "admin" && password == "admin") {
+                // Displaying a success message
+                userEditText.error = "Login Successful"
+                passwordEditText.error = "Login Successful"
+            } else if (userName == databaseUser && password == databasePassword) {
+                //Display success message
+                userEditText.error = "Login Successful"
+                passwordEditText.error = "Login Successful"
+            }else {
                 // Displaying an error message
-                userEditText.error = "Username is required"
-                passwordEditText.error = "Password is required"
-            } else {
-                // Checking if the user input is correct
-                if (userName == "admin" && password == "admin") {
-                    // Displaying a success message
-                    userEditText.error = "Login Successful"
-                    passwordEditText.error = "Login Successful"
-                } else if (userName == fileUser && password == filePassword) {
-                    //Display success message
-                    userEditText.error = "Login Successful"
-                    passwordEditText.error = "Login Successful"
-                }else {
-                    // Displaying an error message
-                    userEditText.error = "Invalid username or password"
-                    passwordEditText.error = "Invalid username or password"
-                }
+                userEditText.error = "Invalid username or password"
+                passwordEditText.error = "Invalid username or password"
             }
         }
-
-
+    }
+    // Method for going to register activity
+    private fun registration() {
+        // Going to register activity
+        startActivity(Intent(this, Registration::class.java))
     }
 }
