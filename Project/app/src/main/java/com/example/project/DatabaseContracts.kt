@@ -11,8 +11,7 @@ data class User(
     @PrimaryKey val id: String,
     val username: String,
     val password: String,
-    val carModel: String,
-    val profileImage: Image
+    val cars: List<String>
 )
 
 @Entity(tableName = "entries")
