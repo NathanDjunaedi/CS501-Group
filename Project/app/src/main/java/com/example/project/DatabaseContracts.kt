@@ -10,7 +10,7 @@ import java.util.UUID
 data class User(
     @PrimaryKey val id: String,
     val username: String,
-    val email: String,
+    val password: String,
     val carModel: String,
     val profileImage: Image
 )
