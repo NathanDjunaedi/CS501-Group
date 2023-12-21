@@ -59,20 +59,3 @@ interface RaceTimeArrayDao {
     suspend fun deleteAll()
 }
 
-@Dao
-interface RaceTimeDao {
-    @Insert
-    suspend fun insert(timeArray: RaceTimeArray)
-
-    @Query("SELECT * FROM raceTimeArrays")
-    fun getAllEntries()
-
-    @Update
-    suspend fun updateTime(raceTime: RaceTime)
-
-    @Delete
-    suspend fun deleteTime(raceTime: RaceTime)
-
-    @Query("DELETE FROM raceTime")
-    suspend fun deleteAll()
-}
