@@ -158,20 +158,14 @@ class Settings : AppCompatActivity() {
 
     // Method to refresh spinner with new information
     private fun refreshSpinner() {
-        // TODO: Pull new info from DB and refresh currentVehicles spinner
+        val database = SandSDatabase.getDatabase(context = applicationContext)
+        val userDao = database.userDao()
 
-
-
-
-
-
-        /*
-        example of how to refresh spinner
-
-        val items = listOf("Red", "Green", "Blue")
-        val adapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, items)
-        spinner.setAdapter(adapter)
-         */
+        if (MainActivity.Username.username != null) {
+            val user = userDao.getUser(username = MainActivity.Username.username!!)
+            val carList = user.cars.toList()
+            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, carList)
+        }
     }
 
     // Method to add vehicle to database
@@ -198,15 +192,17 @@ class Settings : AppCompatActivity() {
 
     // Method to delete vehicle from database
     private fun deleteVehicleFromDB(car: String) {
-        // TODO: Delete vehicle from DB
         val database = SandSDatabase.getDatabase(context = applicationContext)
         val userDao = database.userDao()
 
         if (MainActivity.Username.username != null) {
             val user = userDao.getUser(username = MainActivity.Username.username!!)
-            var cars = user.cars.toList()
-            // TODO: finish this
             val scope = CoroutineScope(Dispatchers.Default)
+            val cars = user.cars.toMutableList()
+
+            cars.remove(car)
+            user.cars = cars
+
             scope.launch {
                 userDao.updateUser(user)
             }
@@ -217,14 +213,27 @@ class Settings : AppCompatActivity() {
 
     // Method to change password in DB
     private fun changePasswordInDB() {
-        // TODO: Change password in DB
+        val database = SandSDatabase.getDatabase(context = applicationContext)
+        val userDao = database.userDao()
 
+        if (MainActivity.Username.username != null) {
+            val user = userDao.getUser(username = MainActivity.Username.username!!)
+            val scope = CoroutineScope(Dispatchers.Default)
+            val password = user.password
+            if (oldPassword.text.toString() == password) {
+                user.password = newPassword.text.toString()
 
-        
-
-
-        Toast.makeText(this, "Password changed successfully!", Toast.LENGTH_SHORT).show()
-        oldPassword.text.clear()
-        newPassword.text.clear()
+                scope.launch {
+                    userDao.updateUser(user)
+                }
+                scope.cancel()
+                Toast.makeText(this, "Password changed successfully!", Toast.LENGTH_SHORT).show()
+                oldPassword.text.clear()
+                newPassword.text.clear()
+            }
+            else {
+                Toast.makeText(this, "Old password did not match!", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 }
