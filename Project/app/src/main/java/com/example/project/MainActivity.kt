@@ -35,6 +35,10 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
+    // Singleton class to hold username
+    object Username {
+        var username: String? = null
+    }
     // Login method
     private fun login() {
         // Getting the user input
@@ -50,20 +54,20 @@ class MainActivity : AppCompatActivity() {
             val userDao = SandSDatabase.getDatabase(applicationContext).userDao()
             val user = userDao.getUser(userName)
 
-            if (user.password == password) {
-                userEditText.error = "Login Successful"
-                passwordEditText.error = "Login Successful"
-            }
+
             // Checking if the user input is correct
             if (userName == "admin" && password == "admin") {
+                Username.username = "admin"
                 // Displaying a success message
                 userEditText.error = "Login Successful"
                 passwordEditText.error = "Login Successful"
-            } else if (userName == databaseUser && password == databasePassword) {
-                //Display success message
+            }
+            else if (user.password == password) {
+                Username.username = userName
                 userEditText.error = "Login Successful"
                 passwordEditText.error = "Login Successful"
-            }else {
+            }
+            else {
                 // Displaying an error message
                 userEditText.error = "Invalid username or password"
                 passwordEditText.error = "Invalid username or password"

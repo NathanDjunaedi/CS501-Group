@@ -11,7 +11,7 @@ import kotlinx.coroutines.*
 
 class Registration : AppCompatActivity() {
 
-    val scope = CoroutineScope(Dispatchers.Default)
+    private val scope = CoroutineScope(Dispatchers.Default)
     // Listing all components in the layout
     private lateinit var newUsername: EditText
     private lateinit var newPassword: EditText
