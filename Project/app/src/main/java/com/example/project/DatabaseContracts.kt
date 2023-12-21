@@ -8,27 +8,27 @@ import java.util.UUID
 
 @Entity(tableName = "users")
 data class User(
-    @PrimaryKey val username: String,
-    val password: String,
-    val cars: List<String>
+    @PrimaryKey var username: String,
+    var password: String,
+    var cars: List<String>
 )
 
 
 @Entity(tableName = "entries")
 data class Entry(
     @PrimaryKey val id: String,
-    val poster: String,
-    val carModel: String,
-    val reactionTime: Double,
-    val eighthMTime: Double,
-    val eighthMSpeed: Double,
-    val quarterMTime: Double,
-    val quarterMSpeed: Double
+    var poster: String,
+    var carModel: String,
+    var reactionTime: Double,
+    var eighthMTime: Double,
+    var eighthMSpeed: Double,
+    var quarterMTime: Double,
+    var quarterMSpeed: Double
 )
 
 @Entity(tableName = "raceTimeArrays")
 data class RaceTimeArray(
     @PrimaryKey val tableId: String,
-    val entryId: UUID,
-    val raceTimeId: UUID
+    var entryId: String,
+    var raceTimeId: UUID
 )

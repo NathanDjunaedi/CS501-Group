@@ -11,6 +11,10 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 
 class Settings : AppCompatActivity() {
     // Get all elements from the layout
@@ -135,18 +139,21 @@ class Settings : AppCompatActivity() {
     ***DATABASE METHODS***
      */
 
+
     // Function to check if the old password is correct
     private fun checkOldPassword(): Boolean {
-        // TODO: Pull old password from DB
-        var oldPasswordDB: String
+        val database = SandSDatabase.getDatabase(context = applicationContext)
+        val userDao = database.userDao()
 
+        // Pull current password from DB
+        var oldPasswordDB: String? = null
+        if (MainActivity.Username.username != null) {
+            val user = userDao.getUser(username = MainActivity.Username.username!!)
+            oldPasswordDB = user.password
+        }
 
+        return oldPasswordDB == oldPassword.text.toString()
 
-
-
-        //return oldPasswordDB == oldPassword.text.toString()
-        // TODO: DELETE PLACEHOLDER WHEN FINISHED
-        return true
     }
 
     // Method to refresh spinner with new information
@@ -169,11 +176,19 @@ class Settings : AppCompatActivity() {
 
     // Method to add vehicle to database
     private fun addVehicleToDB(car: String) {
-        // TODO: Add vehicle to DB
+        // Add vehicle to User in DB
+        val database = SandSDatabase.getDatabase(context = applicationContext)
+        val userDao = database.userDao()
 
-
-
-
+        if (MainActivity.Username.username != null) {
+            val user = userDao.getUser(username = MainActivity.Username.username!!)
+            user.cars = user.cars + listOf(car)
+            val scope = CoroutineScope(Dispatchers.Default)
+            scope.launch {
+                userDao.updateUser(user)
+            }
+            scope.cancel()
+        }
 
         Toast.makeText(this, "Vehicle added successfully!", Toast.LENGTH_SHORT).show()
         newVehicleYear.text.clear()
@@ -184,11 +199,19 @@ class Settings : AppCompatActivity() {
     // Method to delete vehicle from database
     private fun deleteVehicleFromDB(car: String) {
         // TODO: Delete vehicle from DB
+        val database = SandSDatabase.getDatabase(context = applicationContext)
+        val userDao = database.userDao()
 
-
-
-
-
+        if (MainActivity.Username.username != null) {
+            val user = userDao.getUser(username = MainActivity.Username.username!!)
+            var cars = user.cars.toList()
+            // TODO: finish this
+            val scope = CoroutineScope(Dispatchers.Default)
+            scope.launch {
+                userDao.updateUser(user)
+            }
+            scope.cancel()
+        }
         Toast.makeText(this, "Vehicle deleted successfully!", Toast.LENGTH_SHORT).show()
     }
 
