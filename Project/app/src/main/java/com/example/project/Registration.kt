@@ -69,7 +69,7 @@ class Registration : AppCompatActivity() {
         val make = make.text.toString()
         val model = model.text.toString()
         val carList = mutableListOf(String())
-        carList.add(0, (year+make+model))
+        carList.add(0, (concatenateCar()))
         val newUser = User(id = uuid, password = password, username = username, cars = carList)
 
         // Verify that none are empty
