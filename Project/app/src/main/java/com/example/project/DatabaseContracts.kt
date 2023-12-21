@@ -11,7 +11,7 @@ data class User(
     @PrimaryKey val id: String,
     val username: String,
     val password: String,
-    val carModel: String,
+    val cars: List<String>,
     val profileImage: Image
 )
 
