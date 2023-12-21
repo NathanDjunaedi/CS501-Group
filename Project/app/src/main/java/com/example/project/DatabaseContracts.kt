@@ -12,7 +12,7 @@ data class User(
     val username: String,
     val password: String,
     val cars: List<String>
-)
+
 
 @Entity(tableName = "entries")
 data class Entry(
