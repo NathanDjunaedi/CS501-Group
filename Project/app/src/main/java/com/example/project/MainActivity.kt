@@ -28,12 +28,20 @@ class MainActivity : AppCompatActivity() {
         loginButton = findViewById<Button>(R.id.login_button)
         registerButton = findViewById<Button>(R.id.registerButton)
 
-
-
         // Setting the on click listener for the login button
         loginButton.setOnClickListener {
-
+            login()
         }
+
+        // Setting the on click listener for the register button
+        registerButton.setOnClickListener {
+            goToRegistration()
+        }
+
+
+
+
+
     }
     // Singleton class to hold username
     object Username {
@@ -46,37 +54,50 @@ class MainActivity : AppCompatActivity() {
         password = passwordEditText.text.toString()
 
         // Checking if the user input is empty
-        if (userName.isEmpty() || password.isEmpty()) {
+        if (checkLogin()) {
             // Displaying an error message
             userEditText.error = "Username is required"
             passwordEditText.error = "Password is required"
-        } else {
-            val userDao = SandSDatabase.getDatabase(applicationContext).userDao()
-            val user = userDao.getUser(userName)
+            return
+        }
 
+        // Getting the user from the database
+        val userDao = SandSDatabase.getDatabase(applicationContext).userDao()
+        val user = userDao.getUser(userName)
 
-            // Checking if the user input is correct
-            if (userName == "admin" && password == "admin") {
-                Username.username = "admin"
-                // Displaying a success message
-                userEditText.error = "Login Successful"
-                passwordEditText.error = "Login Successful"
-            }
-            else if (user.password == password) {
-                Username.username = userName
-                userEditText.error = "Login Successful"
-                passwordEditText.error = "Login Successful"
-            }
-            else {
-                // Displaying an error message
-                userEditText.error = "Invalid username or password"
-                passwordEditText.error = "Invalid username or password"
-            }
+        // FOR PRESENTATION PURPOSES ONLY
+        if (userName == "admin" && password == "admin") {
+            Username.username = "admin"
+            // Displaying a success message
+            userEditText.error = "Login Successful"
+            passwordEditText.error = "Login Successful"
+            goToHome()
+        }
+
+        else if (user.password == password) {
+            Username.username = userName
+            userEditText.error = "Login Successful"
+            passwordEditText.error = "Login Successful"
+            goToHome()
+        }
+        else {
+            // Displaying an error message
+            userEditText.error = "Invalid username or password"
+            passwordEditText.error = "Invalid username or password"
         }
     }
-    // Method for going to register activity
-    private fun registration() {
+
+    private fun checkLogin(): Boolean {
+        // Checking if the login is populated
+        return userEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()
+    }
+
+    private fun goToRegistration() {
         // Going to register activity
         startActivity(Intent(this, Registration::class.java))
+    }
+    private fun goToHome() {
+        // Going to home activity
+        startActivity(Intent(this, HomeScreen::class.java))
     }
 }
