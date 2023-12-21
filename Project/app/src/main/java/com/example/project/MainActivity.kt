@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         password = passwordEditText.text.toString()
 
         // Checking if the user input is empty
-        if (checkLogin()) {
+        if (!checkLogin()) {
             // Displaying an error message
             userEditText.error = "Username is required"
             passwordEditText.error = "Password is required"

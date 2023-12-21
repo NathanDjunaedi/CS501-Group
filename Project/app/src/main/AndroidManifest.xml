@@ -11,7 +11,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Project"
-        tools:targetApi="31">
+        tools:targetApi="34">
+        <activity
+            android:name=".ExpandedEntry"
+            android:exported="false" />
+        <activity
+            android:name=".NewEntry"
+            android:exported="false"
+            android:theme="@style/Theme.Project" />
+        <activity
+            android:name=".Settings"
+            android:exported="false" />
+        <activity android:name=".Registration"
+            android:exported="false" />
+        <activity android:name=".HomeScreen"
+            android:exported="false" />
 
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -26,7 +40,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_API_KEY" />
+            android:value="AIzaSyBOXdtddR1nz6Zf2HX0J1UAYDDr3tX2q9E" />
 
         <activity
             android:name=".MainActivity"
