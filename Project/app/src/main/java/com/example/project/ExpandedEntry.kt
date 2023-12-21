@@ -97,7 +97,9 @@ class ExpandedEntry : AppCompatActivity() {
         var eighthMTimeVar = ""
         var quarterMPHVar = ""
         var eighthMPHVar = ""
+
         // TODO: Get times / MPH from DB
+
 
 
 

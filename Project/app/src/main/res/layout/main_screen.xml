@@ -24,18 +24,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/map_main_screen">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/entries_main_screen"
-            android:layout_width="65dp"
-            android:layout_height="222dp"
-            android:background="@null"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/add_entry_main_screen"
-            app:layout_constraintHorizontal_bias="0.046"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radius_text_main_screen"
-            app:layout_constraintVertical_bias="0.821" />
-
         <ImageView
             android:id="@+id/add_entry_main_screen"
             android:layout_width="60dp"
@@ -55,14 +43,13 @@
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="match_parent"
             android:layout_height="30dp"
+            android:background="@null"
             android:max="10"
             android:progress="5"
-            android:background="@null"
 
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/add_entry_main_screen"
-            app:layout_constraintHorizontal_bias="0.527"
-            app:layout_constraintStart_toEndOf="@+id/entries_main_screen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -70,13 +57,13 @@
             android:id="@+id/radius_text_main_screen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@null"
             android:text="@string/radius"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:background="@null"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/radius_main_screen"
-            app:layout_constraintStart_toStartOf="@+id/radius_main_screen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radius_main_screen"
             app:layout_constraintVertical_bias="0.0" />
 
@@ -94,6 +81,31 @@
             app:layout_constraintStart_toEndOf="@+id/radius_text_main_screen"
             app:layout_constraintTop_toBottomOf="@+id/radius_main_screen"
             app:layout_constraintVertical_bias="1.0" />
+
+        <Spinner
+            android:id="@+id/entries_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radius_text_main_screen"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/expand_entry_main_screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/expand_entry"
+            android:textColor="#FFFFFF"
+            app:cornerRadius="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/add_entry_main_screen"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/entries_spinner"
+            app:layout_constraintVertical_bias="0.816" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
