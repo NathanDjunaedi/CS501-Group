@@ -62,7 +62,6 @@ class Registration : AppCompatActivity() {
 
     private fun verifyRegistration() {
         // Get edittext values
-        val uuid = java.util.UUID.randomUUID().toString()
         val username = newUsername.text.toString()
         val password = newPassword.text.toString()
         val year = year.text.toString()
@@ -70,12 +69,11 @@ class Registration : AppCompatActivity() {
         val model = model.text.toString()
         val carList = mutableListOf(String())
         carList.add(0, (year+make+model))
-        val newUser = User(id = uuid, password = password, username = username, cars = carList)
+        val newUser = User(password = password, username = username, cars = carList)
 
         // Verify that none are empty
         if (username.isNotEmpty() && password.isNotEmpty() && year.isNotEmpty() && make.isNotEmpty() && model.isNotEmpty()) {
             // Upload to database and exit registration
-            // TODO: Add to database
             val userDao = SandSDatabase.getDatabase(applicationContext).userDao()
             if (userDao.usernameExists(username) > 0) {
                 // Start coroutine to write new user

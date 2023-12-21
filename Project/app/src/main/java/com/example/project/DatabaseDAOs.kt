@@ -12,9 +12,10 @@ interface UserDao {
 
     @Query("SELECT * FROM users")
     fun getAllUsers(): List<User>
+    @Query("SELECT * FROM users WHERE username = :username")
+    fun getUser(username: String): User
     @Query("SELECT COUNT(*) FROM users WHERE username = :username")
     fun usernameExists(username: String): Int
-
     @Update
     suspend fun updateUser(user: User)
 

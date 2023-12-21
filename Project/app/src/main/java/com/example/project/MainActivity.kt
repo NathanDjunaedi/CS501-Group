@@ -47,6 +47,13 @@ class MainActivity : AppCompatActivity() {
             userEditText.error = "Username is required"
             passwordEditText.error = "Password is required"
         } else {
+            val userDao = SandSDatabase.getDatabase(applicationContext).userDao()
+            val user = userDao.getUser(userName)
+
+            if (user.password == password) {
+                userEditText.error = "Login Successful"
+                passwordEditText.error = "Login Successful"
+            }
             // Checking if the user input is correct
             if (userName == "admin" && password == "admin") {
                 // Displaying a success message

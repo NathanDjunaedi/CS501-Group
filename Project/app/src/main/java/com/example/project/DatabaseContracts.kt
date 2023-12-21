@@ -8,10 +8,10 @@ import java.util.UUID
 
 @Entity(tableName = "users")
 data class User(
-    @PrimaryKey val id: String,
-    val username: String,
+    @PrimaryKey val username: String,
     val password: String,
     val cars: List<String>
+)
 
 
 @Entity(tableName = "entries")
