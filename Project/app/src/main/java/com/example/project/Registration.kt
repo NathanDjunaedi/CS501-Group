@@ -62,13 +62,14 @@ class Registration : AppCompatActivity() {
 
     private fun verifyRegistration() {
         // Get edittext values
+        val uuid = java.util.UUID.randomUUID().toString()
         val username = newUsername.text.toString()
         val password = newPassword.text.toString()
         val year = year.text.toString()
         val make = make.text.toString()
         val model = model.text.toString()
         val carList = mutableListOf(String())
-        carList.add(0, (year+make+model))
+        carList.add(0, (concatenateCar()))
         val newUser = User(password = password, username = username, cars = carList)
 
         // Verify that none are empty
@@ -91,5 +92,10 @@ class Registration : AppCompatActivity() {
             // Display error message
             Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    // Function to concatenate year, make, and model
+    private fun concatenateCar(): String {
+        return year.text.toString() + " " + make.text.toString() + " " + model.text.toString()
     }
 }
