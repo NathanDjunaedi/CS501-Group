@@ -69,12 +69,21 @@ class Registration : AppCompatActivity() {
         // Verify that none are empty
         if (username.isNotEmpty() && password.isNotEmpty() && year.isNotEmpty() && make.isNotEmpty() && model.isNotEmpty()) {
             // Upload to database and exit registration
+
             // TODO: Add to database
+            var car = concatenateCar()
+
+
             Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
             finish()
         } else {
             // Display error message
             Toast.makeText(this, "Please fill out all fields", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    // Function to concatenate year, make, and model
+    private fun concatenateCar(): String {
+        return year.text.toString() + " " + make.text.toString() + " " + model.text.toString()
     }
 }
