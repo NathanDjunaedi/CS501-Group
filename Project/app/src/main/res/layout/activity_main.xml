@@ -16,9 +16,8 @@ TODO:
     <TextView
         android:id="@+id/appName"
         android:text="@string/app_name"
-
-        android:textSize="20dp"
         android:textStyle="bold"
+        android:background="@null"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,7 +40,6 @@ TODO:
         android:importantForAutofill="no"
         android:inputType="textNoSuggestions"
         android:minWidth="48dp"
-
         android:minHeight="48dp"
 
 
@@ -78,8 +76,8 @@ TODO:
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/register_button_text"
+        android:textColor="#FFFFFF"
         app:cornerRadius="0dp"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -94,11 +92,14 @@ TODO:
 
 
         android:text="@string/login_button_text"
+        android:textColor="#FFFFFF"
         app:cornerRadius="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/username"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/username"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintVertical_bias="0.621" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project</string>
+    <string name="app_name">Shift &amp; Share</string>
     <string name="username_hint">Username</string>
     <string name="password_hint">Password</string>
     <string name="register_button_text">Register</string>
@@ -22,4 +22,11 @@
     <string name="eighth_mile">1/8 Mile:</string>
     <string name="quarter_mile">1/4 Mile:</string>
     <string name="back">Back</string>
+    <string name="new_entry">New Entry</string>
+    <string name="radius">Radius: </string>
+    <string name="default_radius">12</string>
+    <string name="instructions_new_entry">Press Start to Record New Time</string>
+    <string name="start">Start</string>
+    <string name="submit">Submit</string>
+    <string name="zero">0</string>
 </resources>
