@@ -1,6 +1,7 @@
 package com.example.project
 
 import android.content.Intent
+import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -38,6 +39,7 @@ class MainActivity : AppCompatActivity() {
     // Singleton class to hold username
     object Username {
         var username: String? = null
+        var cLoc: Location? = null
     }
     // Login method
     private fun login() {

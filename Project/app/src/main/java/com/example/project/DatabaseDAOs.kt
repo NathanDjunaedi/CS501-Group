@@ -4,6 +4,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
+import java.util.UUID
 
 @Dao
 interface UserDao {
@@ -33,6 +34,8 @@ interface EntryDao {
 
     @Query("SELECT * FROM entries")
     fun getAllEntries()
+    @Query("SELECT * FROM entries WHERE id = :uuid")
+    fun getEntry(uuid: UUID): Entry
 
     @Update
     suspend fun updateEntry(entry: Entry)

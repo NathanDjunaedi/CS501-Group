@@ -16,7 +16,7 @@ data class User(
 
 @Entity(tableName = "entries")
 data class Entry(
-    @PrimaryKey val id: String,
+    @PrimaryKey var id: UUID,
     var poster: String,
     var carModel: String,
     var reactionTime: Double,
