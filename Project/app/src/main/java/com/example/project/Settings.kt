@@ -11,6 +11,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.room.Room
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -142,7 +143,11 @@ class Settings : AppCompatActivity() {
 
     // Function to check if the old password is correct
     private fun checkOldPassword(): Boolean {
-        val database = SandSDatabase.getDatabase(context = applicationContext)
+        val database = Room.databaseBuilder(
+            applicationContext,
+            SandSDatabase::class.java,
+            "SandSDatabase"
+        ).build()
         val userDao = database.userDao()
 
         // Pull current password from DB
@@ -158,7 +163,11 @@ class Settings : AppCompatActivity() {
 
     // Method to refresh spinner with new information
     private fun refreshSpinner() {
-        val database = SandSDatabase.getDatabase(context = applicationContext)
+        val database = Room.databaseBuilder(
+            applicationContext,
+            SandSDatabase::class.java,
+            "SandSDatabase"
+        ).build()
         val userDao = database.userDao()
 
         if (MainActivity.Username.username != null) {
@@ -171,7 +180,11 @@ class Settings : AppCompatActivity() {
     // Method to add vehicle to database
     private fun addVehicleToDB(car: String) {
         // Add vehicle to User in DB
-        val database = SandSDatabase.getDatabase(context = applicationContext)
+        val database = Room.databaseBuilder(
+            applicationContext,
+            SandSDatabase::class.java,
+            "SandSDatabase"
+        ).build()
         val userDao = database.userDao()
 
         if (MainActivity.Username.username != null) {
@@ -192,16 +205,21 @@ class Settings : AppCompatActivity() {
 
     // Method to delete vehicle from database
     private fun deleteVehicleFromDB(car: String) {
-        val database = SandSDatabase.getDatabase(context = applicationContext)
+        val database = Room.databaseBuilder(
+            applicationContext,
+            SandSDatabase::class.java,
+            "SandSDatabase"
+        ).build()
         val userDao = database.userDao()
 
         if (MainActivity.Username.username != null) {
             val user = userDao.getUser(username = MainActivity.Username.username!!)
             val scope = CoroutineScope(Dispatchers.Default)
-            val cars = user.cars.toMutableList()
+            var cars : List<String> = user.cars.split(',')
 
+            cars = cars.toMutableList()
             cars.remove(car)
-            user.cars = cars
+            user.cars = cars.toString()
 
             scope.launch {
                 userDao.updateUser(user)
@@ -213,7 +231,11 @@ class Settings : AppCompatActivity() {
 
     // Method to change password in DB
     private fun changePasswordInDB() {
-        val database = SandSDatabase.getDatabase(context = applicationContext)
+        val database = Room.databaseBuilder(
+            applicationContext,
+            SandSDatabase::class.java,
+            "SandSDatabase"
+        ).build()
         val userDao = database.userDao()
 
         if (MainActivity.Username.username != null) {

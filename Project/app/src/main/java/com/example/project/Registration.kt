@@ -6,7 +6,9 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.annotation.UiThread
 import androidx.appcompat.app.AppCompatActivity
+import androidx.room.Room
 import kotlinx.coroutines.*
 
 class Registration : AppCompatActivity() {
@@ -70,21 +72,25 @@ class Registration : AppCompatActivity() {
         val model = model.text.toString()
         val carList = mutableListOf(String())
         carList.add(0, (concatenateCar()))
-        val newUser = User(password = password, username = username, cars = carList)
+        val newUser = User(password = password, username = username, cars = carList.toString())
 
         // Verify that none are empty
         if (username.isNotEmpty() && password.isNotEmpty() && year.isNotEmpty() && make.isNotEmpty() && model.isNotEmpty()) {
             // Upload to database and exit registration
-            val userDao = SandSDatabase.getDatabase(applicationContext).userDao()
-            if (userDao.usernameExists(username) > 0) {
-                // Start coroutine to write new user
-                scope.launch {
+            val userDao = Room.databaseBuilder(
+                applicationContext,
+                SandSDatabase::class.java,
+                "SandSDatabase"
+            ).build().userDao()
+            scope.launch {
+                if (userDao.usernameExists(username) > 0) {
+                    // Start coroutine to write new user
                     userDao.insert(newUser)
                 }
                 scope.cancel()
-            }
-            else {
-                Toast.makeText(this, "Username Taken", Toast.LENGTH_SHORT).show()
+                if(userDao.usernameExists(username) > 0) {
+                    Toast.makeText(applicationContext, "Username Taken", Toast.LENGTH_SHORT).show()
+                }
             }
             Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
             finish()
