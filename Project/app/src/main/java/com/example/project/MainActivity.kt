@@ -1,12 +1,21 @@
 package com.example.project
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
+    private val scope = CoroutineScope(Dispatchers.Default)
     private lateinit var userName: String
     private lateinit var password: String
     private lateinit var userEditText: EditText
@@ -41,7 +50,6 @@ class MainActivity : AppCompatActivity() {
 
 
 
-
     }
     // Singleton class to hold username
     object Username {
@@ -62,9 +70,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Getting the user from the database
-        val userDao = SandSDatabase.getDatabase(applicationContext).userDao()
-        val user = userDao.getUser(userName)
-
+        val userDao = Room.databaseBuilder(
+            applicationContext,
+            SandSDatabase::class.java,
+            "SandSDatabase"
+        ).build().userDao()
+        var user: User? = null
+        scope.launch {
+            val user1: User = userDao.getUser(userName)
+            user = user1
+        }
+        scope.cancel()
         // FOR PRESENTATION PURPOSES ONLY
         if (userName == "admin" && password == "admin") {
             Username.username = "admin"
@@ -73,8 +89,7 @@ class MainActivity : AppCompatActivity() {
             passwordEditText.error = "Login Successful"
             goToHome()
         }
-
-        else if (user.password == password) {
+        else if (user?.password  == password) {
             Username.username = userName
             userEditText.error = "Login Successful"
             passwordEditText.error = "Login Successful"
