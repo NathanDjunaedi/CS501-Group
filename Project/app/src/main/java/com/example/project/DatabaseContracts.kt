@@ -1,6 +1,7 @@
 package com.example.project
 
 import android.media.Image
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.UUID
@@ -9,26 +10,20 @@ import java.util.UUID
 @Entity(tableName = "users")
 data class User(
     @PrimaryKey var username: String,
-    var password: String,
-    var cars: List<String>
+    @ColumnInfo(name = "password") var password: String,
+    @ColumnInfo(name = "cars") var cars: String
 )
 
 
 @Entity(tableName = "entries")
 data class Entry(
     @PrimaryKey val id: String,
-    var poster: String,
-    var carModel: String,
-    var reactionTime: Double,
-    var eighthMTime: Double,
-    var eighthMSpeed: Double,
-    var quarterMTime: Double,
-    var quarterMSpeed: Double
+    @ColumnInfo(name = "poster") var poster: String,
+    @ColumnInfo(name = "carModel") var carModel: String,
+    @ColumnInfo(name = "reactionTime") var reactionTime: Double,
+    @ColumnInfo(name = "eighthMTime") var eighthMTime: Double,
+    @ColumnInfo(name = "eighthMSpeed") var eighthMSpeed: Double,
+    @ColumnInfo(name = "quarterMTime") var quarterMTime: Double,
+    @ColumnInfo(name = "quarterMSpeed") var quarterMSpeed: Double
 )
 
-@Entity(tableName = "raceTimeArrays")
-data class RaceTimeArray(
-    @PrimaryKey val tableId: String,
-    var entryId: String,
-    var raceTimeId: UUID
-)

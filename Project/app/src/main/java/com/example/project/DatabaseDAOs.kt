@@ -32,7 +32,7 @@ interface EntryDao {
     suspend fun insert(entity: Entry)
 
     @Query("SELECT * FROM entries")
-    fun getAllEntries()
+    fun getAllEntries(): List<Entry>
 
     @Update
     suspend fun updateEntry(entry: Entry)
@@ -44,21 +44,4 @@ interface EntryDao {
     suspend fun deleteAll()
 }
 
-@Dao
-interface RaceTimeArrayDao {
-    @Insert
-    suspend fun insert(timeArray: RaceTimeArray)
-
-    @Query("SELECT * FROM raceTimeArrays")
-    fun getAllEntries()
-
-    @Update
-    suspend fun updateArray(timeArray: RaceTimeArray)
-
-    @Delete
-    suspend fun deleteArray(timeArray: RaceTimeArray)
-
-    @Query("DELETE FROM raceTimeArrays")
-    suspend fun deleteAll()
-}
 
